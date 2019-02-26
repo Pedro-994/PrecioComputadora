@@ -27,13 +27,13 @@ public class ArmaTuCompu extends javax.swing.JFrame {
         
         switch (procesador) {
             case "Ryzen 3 2200g":
-                return 1;
+                return 0;
             case "Ryzen 5 2400g":
-                return 2;
+                return 1;
             case "Athlon 240GE":
-                return 3;
+                return 2;
             default:
-                return 4;
+                return 3;
         } 
     }
     
@@ -41,15 +41,15 @@ public class ArmaTuCompu extends javax.swing.JFrame {
         
         switch (ram) {
             case "DDR4 4GB":
-                return 1;
+                return 0;
             case "DDR4 8GB":
-                return 2;
+                return 1;
             case "DDR4 16GB":
-                return 3;
+                return 2;
             case "DDR4 8GB(2X4 DUAL CHANEL)":
-                return 4;
+                return 3;
             default:
-                return 5;
+                return 4;
         }
         
     }
@@ -58,33 +58,36 @@ public class ArmaTuCompu extends javax.swing.JFrame {
         
         switch(disco){
             case "Disco Duro Interno 250 GB":
-                return 1;
+                return 0;
             case "Disco Duro Interno 500 GB":
-                return 2;
+                return 1;
             case "Disco Duro Interno 1 TB":
-                return 3;
+                return 2;
             case "SSD 120 GB":
-                return 4;
+                return 3;
             default:
-                return 5;               
+                return 4;               
         }
     }
     
     public int eligePaqueteria(){
         
         switch(paqueteria){
-            case "Ninguna":
-                return 1;
             case "Paqueteria 1":
-                return 2;
+                return 0;
             case "Paqueteria 2":
-                return 3;
+                return 1;
             case "Paqueteria 3":
-                return 4;
+                return 2;
             case "Paqueteria 4":
+                return 3;
+            case "Paqueteria 5":
+                return 4;
+            case "Paqueteria 6":
                 return 5;
             default:
                 return 6;
+                
         }
         
     }
@@ -93,11 +96,11 @@ public class ArmaTuCompu extends javax.swing.JFrame {
         
         switch(mother){
             case "GIGABYE AB350M-D3H":
-                return 1;
+                return 0;
             case "MSI B450M PRO-VDH":
-                return 2;
+                return 1;
             default:
-                return 3;
+                return 2;
         }
     }
     
@@ -113,9 +116,13 @@ public class ArmaTuCompu extends javax.swing.JFrame {
         seleccionar();
         return (procesador+ ", "+ram+ ", "+paqueteria+ ", "+mother+ ", "+disco);
     }
-    public int total(int procesador, int ram,int paqueteria,int disco,int mother){
-        
-        return costo;
+    
+    public void total(int procesador, int ram,int paqueteria,int disco,int mother){
+        costoT = costo[0][procesador]+costo[1][ram]+costo[2][paqueteria]+costo[3][disco]+costo[4][mother];
+    }
+    
+    public String ImprimeTotal(){
+        return ("$"+costoT);
     }
 
  
@@ -332,6 +339,9 @@ public class ArmaTuCompu extends javax.swing.JFrame {
     private void btncalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalcularActionPerformed
         // TODO add your handling code here:
         txtresumen.setText(imprimeSeleccion());
+        total(eligeProcesador(),eligeRam(),eligePaqueteria(),eligeDisco(),eligeMother());
+        txttotal.setText(ImprimeTotal());
+        
 
     }//GEN-LAST:event_btncalcularActionPerformed
 
@@ -340,6 +350,46 @@ public class ArmaTuCompu extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
+        
+        //Procesadores
+        costo[0][0]=2000;
+        costo[0][1]=3000;
+        costo[0][2]=1500;
+        costo[0][3]=1300;
+        
+        //RAM
+        costo[1][0]=800;
+        costo[1][1]=1600;
+        costo[1][2]=2500;
+        costo[1][3]=1500;
+        costo[1][4]=2600;
+        
+        //PAQUETERIA
+        
+        costo[2][0]=700;
+        costo[2][1]=1000;
+        costo[2][2]=1200;
+        costo[2][3]=1300;
+        costo[2][4]=1500;
+        costo[2][5]=1800;
+        costo[2][6]=0;
+        
+        //DISCO
+        costo[3][0]=700;
+        costo[3][1]=1000;
+        costo[3][2]=2000;
+        costo[3][3]=800;
+        costo[3][4]=1200;
+        
+        
+        //MOTHER
+        costo[4][0]=2000;
+        costo[4][1]=2600;
+        costo[4][2]=3500;
+        
+
+        
+        
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -372,7 +422,8 @@ public class ArmaTuCompu extends javax.swing.JFrame {
     }
     
     private static String procesador,ram,paqueteria,mother,disco;
-    private static int costo=0;
+    private static int costoT=0;
+    private static int [][] costo = new int[6][7];
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btncalcular;
