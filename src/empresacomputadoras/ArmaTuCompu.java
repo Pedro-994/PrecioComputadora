@@ -22,6 +22,101 @@ public class ArmaTuCompu extends javax.swing.JFrame {
     public ArmaTuCompu() {
         initComponents();
     }
+    
+    public int eligeProcesador(){
+        
+        switch (procesador) {
+            case "Ryzen 3 2200g":
+                return 1;
+            case "Ryzen 5 2400g":
+                return 2;
+            case "Athlon 240GE":
+                return 3;
+            default:
+                return 4;
+        } 
+    }
+    
+    public int  eligeRam(){
+        
+        switch (ram) {
+            case "DDR4 4GB":
+                return 1;
+            case "DDR4 8GB":
+                return 2;
+            case "DDR4 16GB":
+                return 3;
+            case "DDR4 8GB(2X4 DUAL CHANEL)":
+                return 4;
+            default:
+                return 5;
+        }
+        
+    }
+    
+    public int eligeDisco(){
+        
+        switch(disco){
+            case "Disco Duro Interno 250 GB":
+                return 1;
+            case "Disco Duro Interno 500 GB":
+                return 2;
+            case "Disco Duro Interno 1 TB":
+                return 3;
+            case "SSD 120 GB":
+                return 4;
+            default:
+                return 5;               
+        }
+    }
+    
+    public int eligePaqueteria(){
+        
+        switch(paqueteria){
+            case "Ninguna":
+                return 1;
+            case "Paqueteria 1":
+                return 2;
+            case "Paqueteria 2":
+                return 3;
+            case "Paqueteria 3":
+                return 4;
+            case "Paqueteria 4":
+                return 5;
+            default:
+                return 6;
+        }
+        
+    }
+    
+    public int eligeMother(){
+        
+        switch(mother){
+            case "GIGABYE AB350M-D3H":
+                return 1;
+            case "MSI B450M PRO-VDH":
+                return 2;
+            default:
+                return 3;
+        }
+    }
+    
+    public void seleccionar(){
+        procesador = cboprocesador.getSelectedItem().toString();
+        ram = cboram.getSelectedItem().toString();
+        paqueteria = cbopaqueteria.getSelectedItem().toString();
+        mother = cbomother.getSelectedItem().toString();
+        disco = cbodisco.getSelectedItem().toString();
+    }
+    
+    public String imprimeSeleccion(){
+        seleccionar();
+        return (procesador+ ", "+ram+ ", "+paqueteria+ ", "+mother+ ", "+disco);
+    }
+    public int total(int procesador, int ram,int paqueteria,int disco,int mother){
+        
+        return costo;
+    }
 
  
     @SuppressWarnings("unchecked")
@@ -47,7 +142,7 @@ public class ArmaTuCompu extends javax.swing.JFrame {
         jCheckBox5 = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
         txtresumen = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txttotal = new javax.swing.JTextField();
         btncalcular = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -137,8 +232,8 @@ public class ArmaTuCompu extends javax.swing.JFrame {
         txtresumen.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtresumen.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 0, 255)), "Resumen de compra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("hooge 05_55", 1, 18))); // NOI18N
 
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 0, 51)), "Total", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Algerian", 1, 18))); // NOI18N
+        txttotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txttotal.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 0, 51)), "Total", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Algerian", 1, 18))); // NOI18N
 
         btncalcular.setText("Calcular");
         btncalcular.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +280,7 @@ public class ArmaTuCompu extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txttotal, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -227,7 +322,7 @@ public class ArmaTuCompu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtresumen, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txttotal, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
 
@@ -236,14 +331,8 @@ public class ArmaTuCompu extends javax.swing.JFrame {
 
     private void btncalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalcularActionPerformed
         // TODO add your handling code here:
-        String procesador,ram,paqueteria,mother,disco;
-        procesador = cboprocesador.getSelectedItem().toString();
-        ram = cboram.getSelectedItem().toString();
-        paqueteria = cbopaqueteria.getSelectedItem().toString();
-        mother = cbomother.getSelectedItem().toString();
-        disco = cbodisco.getSelectedItem().toString();
-        txtresumen.setText(procesador+ " "+ram+ " "+paqueteria+ " "+mother+ " "+disco);
-        
+        txtresumen.setText(imprimeSeleccion());
+
     }//GEN-LAST:event_btncalcularActionPerformed
 
     /**
@@ -272,6 +361,7 @@ public class ArmaTuCompu extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ArmaTuCompu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -280,6 +370,9 @@ public class ArmaTuCompu extends javax.swing.JFrame {
             }
         });
     }
+    
+    private static String procesador,ram,paqueteria,mother,disco;
+    private static int costo=0;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btncalcular;
@@ -301,7 +394,7 @@ public class ArmaTuCompu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField txtresumen;
+    private javax.swing.JTextField txttotal;
     // End of variables declaration//GEN-END:variables
 }
