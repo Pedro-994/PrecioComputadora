@@ -21,6 +21,11 @@ public class ArmaTuCompu extends javax.swing.JFrame {
      */
     public ArmaTuCompu() {
         initComponents();
+        txtresumen.setLineWrap(true);
+        txtresumen.setWrapStyleWord(true);
+        txttotal.setLineWrap(true);
+        txttotal.setWrapStyleWord(true);
+                // txtresumen.setLineWrap(true);
     }
     
     public int eligeProcesador(){
@@ -105,6 +110,7 @@ public class ArmaTuCompu extends javax.swing.JFrame {
     }
     
     public void extras(){
+        
         if(chkmouse.isSelected())
             costoT = costoT + costo[5][0];
         if(chkteclado.isSelected())
@@ -113,32 +119,40 @@ public class ArmaTuCompu extends javax.swing.JFrame {
             costoT = costoT + costo[5][2];
         if(chkimpresora.isSelected())
             costoT = costoT + costo[5][3];
-        if(chkaudifonos.isSelected())
+        if(jCheckBox5.isSelected())
             costoT = costoT + costo[5][4];
     }
     
     public void seleccionar(){
+        
         procesador = cboprocesador.getSelectedItem().toString();
         ram = cboram.getSelectedItem().toString();
         paqueteria = cbopaqueteria.getSelectedItem().toString();
         mother = cbomother.getSelectedItem().toString();
         disco = cbodisco.getSelectedItem().toString();
+        
     }
     
-    public String imprimeSeleccion(){
-        seleccionar();
-        return (procesador+ ", "+ram+ ", "+paqueteria+ ", "+mother+ ", "+disco);
+    public void resumenCompra(int procesador, int ram,int paqueteria,int disco,int mother){
+        
+        txtresumen.setText(this.procesador+ "= $"+costo[0][procesador]+"\n"+
+                           this.ram+ "= $"+costo[1][ram]+"\n"+this.paqueteria+"= $"+costo[2][paqueteria]
+                            +"\n"+this.mother+ "= $"+costo[4][mother]+"\n"+this.disco+"= $"+costo[3][disco]);
+
     }
     
     public void total(int procesador, int ram,int paqueteria,int disco,int mother){
+        
         costoT = costo[0][procesador]+costo[1][ram]+costo[2][paqueteria]+costo[3][disco]+costo[4][mother];
         extras();
+        costoI = (float) (costoT*1.07);
+        
     }
     
     public String ImprimeTotal(){
-        return ("$"+costoT);
+        
+        return ("Total= $"+costoT+"\n"+"Total+IVA= $"+costoI);
     }
-
  
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -155,16 +169,18 @@ public class ArmaTuCompu extends javax.swing.JFrame {
         cbomother = new javax.swing.JComboBox<>();
         cbopaqueteria = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        Accesorios = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         chkmouse = new javax.swing.JCheckBox();
         chkteclado = new javax.swing.JCheckBox();
         chkmonitor = new javax.swing.JCheckBox();
         chkimpresora = new javax.swing.JCheckBox();
-        chkaudifonos = new javax.swing.JCheckBox();
+        jCheckBox5 = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
-        txtresumen = new javax.swing.JTextField();
-        txttotal = new javax.swing.JTextField();
         btncalcular = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtresumen = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txttotal = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -214,26 +230,26 @@ public class ArmaTuCompu extends javax.swing.JFrame {
         chkimpresora.setText("Impresora");
         chkimpresora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        chkaudifonos.setText("Audifonos");
-        chkaudifonos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jCheckBox5.setText("Audifonos");
+        jCheckBox5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout AccesoriosLayout = new javax.swing.GroupLayout(Accesorios);
-        Accesorios.setLayout(AccesoriosLayout);
-        AccesoriosLayout.setHorizontalGroup(
-            AccesoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AccesoriosLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(AccesoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chkmouse)
                     .addComponent(chkteclado)
                     .addComponent(chkmonitor)
                     .addComponent(chkimpresora)
-                    .addComponent(chkaudifonos))
+                    .addComponent(jCheckBox5))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
-        AccesoriosLayout.setVerticalGroup(
-            AccesoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(AccesoriosLayout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(chkmouse)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkteclado)
@@ -242,19 +258,13 @@ public class ArmaTuCompu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(chkimpresora)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(chkaudifonos)
+                .addComponent(jCheckBox5)
                 .addContainerGap())
         );
 
         jLabel7.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Accesorios");
-
-        txtresumen.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtresumen.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 0, 255)), "Resumen de compra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("hooge 05_55", 1, 18))); // NOI18N
-
-        txttotal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txttotal.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 0, 51)), "Total", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Algerian", 1, 18))); // NOI18N
 
         btncalcular.setText("Calcular");
         btncalcular.addActionListener(new java.awt.event.ActionListener() {
@@ -263,51 +273,65 @@ public class ArmaTuCompu extends javax.swing.JFrame {
             }
         });
 
+        txtresumen.setColumns(20);
+        txtresumen.setRows(5);
+        txtresumen.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 0, 255)), "Resumen de compra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Castellar", 1, 18), new java.awt.Color(0, 0, 0))); // NOI18N
+        jScrollPane1.setViewportView(txtresumen);
+
+        txttotal.setColumns(20);
+        txttotal.setRows(5);
+        txttotal.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.MatteBorder(null), "TOTAL", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Algerian", 1, 18))); // NOI18N
+        jScrollPane2.setViewportView(txttotal);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cboprocesador, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cbodisco, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cboprocesador, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(cbodisco, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(36, 36, 36)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(cboram, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(cbomother, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(25, 25, 25)))
-                                        .addGap(34, 34, 34)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cbopaqueteria, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btncalcular, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(txtresumen))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(txttotal, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cboram, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cbomother, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(25, 25, 25)))
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbopaqueteria, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btncalcular, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Accesorios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(97, Short.MAX_VALUE))
+                        .addGap(126, 126, 126)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(173, 173, 173)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,12 +362,12 @@ public class ArmaTuCompu extends javax.swing.JFrame {
                                     .addComponent(cbodisco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cbomother, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btncalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(Accesorios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtresumen, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txttotal, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(53, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -351,16 +375,14 @@ public class ArmaTuCompu extends javax.swing.JFrame {
 
     private void btncalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncalcularActionPerformed
         // TODO add your handling code here:
-        txtresumen.setText(imprimeSeleccion());
+        seleccionar();
+        resumenCompra(eligeProcesador(),eligeRam(),eligePaqueteria(),eligeDisco(),eligeMother());
         total(eligeProcesador(),eligeRam(),eligePaqueteria(),eligeDisco(),eligeMother());
         txttotal.setText(ImprimeTotal());
         
 
     }//GEN-LAST:event_btncalcularActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         
@@ -393,8 +415,7 @@ public class ArmaTuCompu extends javax.swing.JFrame {
         costo[3][2]=2000;
         costo[3][3]=800;
         costo[3][4]=1200;
-        
-        
+         
         //MOTHER
         costo[4][0]=2000;
         costo[4][1]=2600;
@@ -407,10 +428,7 @@ public class ArmaTuCompu extends javax.swing.JFrame {
         costo[5][2]=1500;
         costo[5][3]=3500;
         costo[5][4]=800;
-        
-
-        
-        
+         
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
@@ -444,21 +462,21 @@ public class ArmaTuCompu extends javax.swing.JFrame {
     
     private static String procesador,ram,paqueteria,mother,disco;
     private static int costoT=0;
+    private static float costoI=0;
     private static int [][] costo = new int[6][7];
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Accesorios;
     private javax.swing.JButton btncalcular;
     private javax.swing.JComboBox<String> cbodisco;
     private javax.swing.JComboBox<String> cbomother;
     private javax.swing.JComboBox<String> cbopaqueteria;
     private javax.swing.JComboBox<String> cboprocesador;
     private javax.swing.JComboBox<String> cboram;
-    private javax.swing.JCheckBox chkaudifonos;
     private javax.swing.JCheckBox chkimpresora;
     private javax.swing.JCheckBox chkmonitor;
     private javax.swing.JCheckBox chkmouse;
     private javax.swing.JCheckBox chkteclado;
+    private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -466,7 +484,10 @@ public class ArmaTuCompu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField txtresumen;
-    private javax.swing.JTextField txttotal;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea txtresumen;
+    private javax.swing.JTextArea txttotal;
     // End of variables declaration//GEN-END:variables
 }
