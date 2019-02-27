@@ -104,6 +104,19 @@ public class ArmaTuCompu extends javax.swing.JFrame {
         }
     }
     
+    public void extras(){
+        if(chkmouse.isSelected())
+            costoT = costoT + costo[5][0];
+        if(chkteclado.isSelected())
+            costoT = costoT + costo[5][1];
+        if(chkmonitor.isSelected())
+            costoT = costoT + costo[5][2];
+        if(chkimpresora.isSelected())
+            costoT = costoT + costo[5][3];
+        if(chkaudifonos.isSelected())
+            costoT = costoT + costo[5][4];
+    }
+    
     public void seleccionar(){
         procesador = cboprocesador.getSelectedItem().toString();
         ram = cboram.getSelectedItem().toString();
@@ -119,6 +132,7 @@ public class ArmaTuCompu extends javax.swing.JFrame {
     
     public void total(int procesador, int ram,int paqueteria,int disco,int mother){
         costoT = costo[0][procesador]+costo[1][ram]+costo[2][paqueteria]+costo[3][disco]+costo[4][mother];
+        extras();
     }
     
     public String ImprimeTotal(){
@@ -141,12 +155,12 @@ public class ArmaTuCompu extends javax.swing.JFrame {
         cbomother = new javax.swing.JComboBox<>();
         cbopaqueteria = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
+        Accesorios = new javax.swing.JPanel();
+        chkmouse = new javax.swing.JCheckBox();
+        chkteclado = new javax.swing.JCheckBox();
+        chkmonitor = new javax.swing.JCheckBox();
+        chkimpresora = new javax.swing.JCheckBox();
+        chkaudifonos = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
         txtresumen = new javax.swing.JTextField();
         txttotal = new javax.swing.JTextField();
@@ -188,47 +202,47 @@ public class ArmaTuCompu extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Paqueteria");
 
-        jCheckBox1.setText("Mouse");
-        jCheckBox1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        chkmouse.setText("Mouse");
+        chkmouse.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jCheckBox2.setText("Teclado");
-        jCheckBox2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        chkteclado.setText("Teclado");
+        chkteclado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jCheckBox3.setText("Monitor");
-        jCheckBox3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        chkmonitor.setText("Monitor");
+        chkmonitor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jCheckBox4.setText("Impresora");
-        jCheckBox4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        chkimpresora.setText("Impresora");
+        chkimpresora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        jCheckBox5.setText("Audifonos");
-        jCheckBox5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        chkaudifonos.setText("Audifonos");
+        chkaudifonos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout AccesoriosLayout = new javax.swing.GroupLayout(Accesorios);
+        Accesorios.setLayout(AccesoriosLayout);
+        AccesoriosLayout.setHorizontalGroup(
+            AccesoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AccesoriosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox3)
-                    .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox5))
+                .addGroup(AccesoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(chkmouse)
+                    .addComponent(chkteclado)
+                    .addComponent(chkmonitor)
+                    .addComponent(chkimpresora)
+                    .addComponent(chkaudifonos))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jCheckBox1)
+        AccesoriosLayout.setVerticalGroup(
+            AccesoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AccesoriosLayout.createSequentialGroup()
+                .addComponent(chkmouse)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox2)
+                .addComponent(chkteclado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox3)
+                .addComponent(chkmonitor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBox4)
+                .addComponent(chkimpresora)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jCheckBox5)
+                .addComponent(chkaudifonos)
                 .addContainerGap())
         );
 
@@ -283,14 +297,13 @@ public class ArmaTuCompu extends javax.swing.JFrame {
                                             .addComponent(btncalcular, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(txtresumen))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
                                 .addComponent(txttotal, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(Accesorios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(173, 173, 173)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -325,7 +338,7 @@ public class ArmaTuCompu extends javax.swing.JFrame {
                                     .addComponent(cbodisco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cbomother, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btncalcular, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Accesorios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtresumen, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -387,6 +400,14 @@ public class ArmaTuCompu extends javax.swing.JFrame {
         costo[4][1]=2600;
         costo[4][2]=3500;
         
+        //EXTRAS
+        
+        costo[5][0]=150;
+        costo[5][1]=150;
+        costo[5][2]=1500;
+        costo[5][3]=3500;
+        costo[5][4]=800;
+        
 
         
         
@@ -426,17 +447,18 @@ public class ArmaTuCompu extends javax.swing.JFrame {
     private static int [][] costo = new int[6][7];
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Accesorios;
     private javax.swing.JButton btncalcular;
     private javax.swing.JComboBox<String> cbodisco;
     private javax.swing.JComboBox<String> cbomother;
     private javax.swing.JComboBox<String> cbopaqueteria;
     private javax.swing.JComboBox<String> cboprocesador;
     private javax.swing.JComboBox<String> cboram;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox chkaudifonos;
+    private javax.swing.JCheckBox chkimpresora;
+    private javax.swing.JCheckBox chkmonitor;
+    private javax.swing.JCheckBox chkmouse;
+    private javax.swing.JCheckBox chkteclado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -444,7 +466,6 @@ public class ArmaTuCompu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField txtresumen;
     private javax.swing.JTextField txttotal;
     // End of variables declaration//GEN-END:variables
